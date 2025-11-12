@@ -1,5 +1,3 @@
 Flask
 qrcode
 Pillow
-# any other modules your app uses
-web: python app.py
