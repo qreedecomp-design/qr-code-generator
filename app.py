@@ -11,6 +11,7 @@ UPLOAD_FOLDER = 'static/qrcodes/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+# ---------------- HEADERS ----------------
 @app.after_request
 def add_headers(response):
     response.headers['X-Frame-Options'] = 'ALLOWALL'
@@ -21,8 +22,11 @@ def add_headers(response):
 def load_users():
     if not os.path.exists("users.json"):
         return {}
-    with open("users.json", "r") as f:
-        return json.load(f)
+    try:
+        with open("users.json", "r") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, FileNotFoundError):
+        return {}  # safe fallback
 
 def save_users(users):
     with open("users.json", "w") as f:
@@ -60,17 +64,25 @@ def index():
             flash("Please enter text or upload a file.")
             return redirect(url_for('index'))
 
-        # Generate QR
-        qr = qrcode.make(qr_content)
-        qr.save(qr_path)
+        # --- Optimized QR generation ---
+        qr = qrcode.QRCode(
+            version=1,  # smallest QR
+            error_correction=qrcode.constants.ERROR_CORRECT_L,  # faster
+            box_size=5,
+            border=2
+        )
+        qr.add_data(qr_content)
+        qr.make(fit=True)
+        img = qr.make_image(fill_color="black", back_color="white")
+        img.save(qr_path)
         qr_img = f"static/qrcodes/{qr_filename}"
         qr_name_user = qr_name_input
 
-        # Save to user safely
+        # --- Save to user safely ---
         users = load_users()
         if username not in users:
             users[username] = {"password": "", "qr_codes": []}
-        elif "qr_codes" not in users[username]:
+        if not isinstance(users[username].get("qr_codes"), list):
             users[username]["qr_codes"] = []
 
         users[username]["qr_codes"].append({"name": qr_name_user, "file": qr_img})
@@ -169,6 +181,7 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     debug = os.environ.get("DEBUG", "False") == "True"
     app.run(host="0.0.0.0", port=port, debug=debug)
+
 
 
 
