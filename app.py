@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import Flask, render_template, request, session, redirect, url_for, flash, make_response
 import qrcode
 import os
 import uuid
@@ -10,6 +10,12 @@ app.secret_key = "supersecretkey"
 UPLOAD_FOLDER = 'static/qrcodes/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+@app.after_request
+def add_headers(response):
+    response.headers['X-Frame-Options'] = 'ALLOWALL'
+    response.headers['Content-Security-Policy'] = "frame-ancestors 'self' https://whop.com"
+    return response
 
 # ---------------- USER DATA ----------------
 def load_users():
