@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Generator Qreede</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Qreede</h1>
+
+  <table class="header-table">
+    <tr>
+      <td class="logo-cell">
+        <img src="{{ url_for('static', filename='Qreedlogo.jpg') }}" alt="Logo">
+      </td>
+      <td class="login-cell">
+        {% if username %}
+          Logged in as <strong>{{ username }}</strong> | <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+
+  <table border="0.01" width="100%" align="center">
+    <tr>
+      <td align="left" width="70%">
+        <form method="POST" enctype="multipart/form-data" action="/">
+          <label for="text-input">Input text or URL</label>
+          <textarea id="text-input" name="text-url" placeholder="Enter text or URL" rows="6"></textarea>
+
+          <label for="qr-name">Name your QR code</label>
+          <input type="text" id="qr-name" name="qr-name" placeholder="QR code name">
+
+          <label for="fichier">Attach File</label>
+          <input type="file" id="fichier" name="fichier">
+
+          <button type="submit">Generate QR</button>
+        </form>
+      </td>
+
+      <td align="center" width="30%">
+        {% if qr_img %}
+          <h3>Your QR Code:</h3>
+          <img src="{{ qr_img }}" alt="QR Code">
+          <p><a href="{{ qr_img }}" target="_blank">Open QR in new tab</a></p>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+
+  <!-- User QR gallery -->
+  {% if user_qr_list %}
+    <h2 style="text-align:center; color:#5AC8FA;">Your Saved QR Codes</h2>
+    <div class="qr-gallery">
+      {% for qr in user_qr_list %}
+        <div>
+          <img src="{{ qr.file }}" alt="{{ qr.name }}">
+          <p>{{ qr.name }}</p>
+          <a href="{{ qr.file }}" target="_blank">Open</a>
+          <form action="{{ url_for('delete_qr', qr_file=qr.file.split('/')[-1]) }}" method="POST" style="margin-top:5px;">
+            <button type="submit" class="delete-btn">Delete</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</body>
+</html>
+
+
+
+

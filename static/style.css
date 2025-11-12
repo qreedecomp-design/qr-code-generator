@@ -1,0 +1,173 @@
+/* --------- BODY & BACKGROUND --------- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1c1c1c 100%);
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* --------- HEADER --------- */
+h1 {
+    text-align: center;
+    color: #5AC8FA; /* sky-blue */
+    margin-top: 20px;
+    font-size: 3em;
+    text-shadow: 1px 1px 4px #000;
+}
+
+/* --------- HEADER TABLE --------- */
+.header-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: #0d0d0d;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+}
+
+.logo-cell {
+    padding: 10px;
+}
+
+.logo-cell img {
+    width: 80px;
+    height: 80px;
+}
+
+.login-cell {
+    text-align: right;
+    padding: 10px;
+    font-size: 1em;
+}
+
+.login-cell a {
+    color: #5AC8FA;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.login-cell a:hover {
+    text-decoration: underline;
+}
+
+/* --------- FORMS --------- */
+form {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.6);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #5AC8FA;
+    font-size: 1.1em;
+}
+
+form input[type="text"],
+form input[type="file"],
+form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #5AC8FA;
+    background: #0d0d0d;
+    color: #f0f0f0;
+    font-size: 1em;
+}
+
+form input::placeholder,
+form textarea::placeholder {
+    color: #a0a0a0;
+    font-style: italic;
+}
+
+form button {
+    background-color: #5AC8FA;
+    color: #0a0a0a;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background-color: #3fb0f2;
+}
+
+/* --------- QR CODE DISPLAY --------- */
+img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.7);
+}
+
+/* QR gallery */
+.qr-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.qr-gallery div {
+    background: #1a1a1a;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.6);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.qr-gallery div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(90,200,250,0.6);
+}
+
+.qr-gallery p {
+    color: #5AC8FA;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+.qr-gallery a {
+    color: #5AC8FA;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.qr-gallery a:hover {
+    text-decoration: underline;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+    background-color: #ff4c4c;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 5px;
+    transition: 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: #e33b3b;
+}
+
+/* Optional: style textarea box for QR input */
+textarea {
+    resize: vertical;
+}
+
+
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Qreede</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Qreede</h1>
+
+  <table class="header-table">
+    <tr>
+      <td class="logo-cell">
+        <img src="{{ url_for('static', filename='Qreedlogo.jpg') }}" alt="Logo">
+      </td>
+      <td class="login-cell">
+        <a href="{{ url_for('register') }}">Register</a>
+      </td>
+    </tr>
+  </table>
+
+  <div style="max-width: 400px; margin: 30px auto;">
+    <form method="POST" action="{{ url_for('login') }}">
+      <h3 style="color:#5AC8FA; text-align:center; margin-bottom:20px;">Login</h3>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul style="color: #FF6B6B; list-style:none; padding-left:0;">
+            {% for msg in messages %}
+              <li>{{ msg }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+      <label for="username">Username</label><br>
+      <input type="text" id="username" name="username" placeholder="Enter username" 
+             style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #5AC8FA; background:#1a1a1a; color:#f0f0f0;"><br>
+
+      <label for="password">Password</label><br>
+      <input type="password" id="password" name="password" placeholder="Enter password" 
+             style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #5AC8FA; background:#1a1a1a; color:#f0f0f0;"><br>
+
+      <button type="submit" style="width:100%;">Login</button>
+      <p style="text-align:center; margin-top:10px; font-size:14px;">
+        Don't have an account? <a href="{{ url_for('register') }}" style="color:#5AC8FA;">Register</a>
+      </p>
+    </form>
+  </div>
+</body>
+</html>
+
+
+
