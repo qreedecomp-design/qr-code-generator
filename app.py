@@ -3,6 +3,7 @@ import qrcode
 import os
 import uuid
 import json
+import send_from_directory
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
@@ -175,6 +176,13 @@ def delete_qr(qr_file):
         flash("QR code not found!")
 
     return redirect(url_for('index'))
+    
+    
+
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory('static', 'robots.txt')
+
 
 # ---------------- RUN APP ----------------
 if __name__ == "__main__":
