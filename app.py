@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request, session, redirect, url_for, flash, make_response
+from flask import Flask, render_template, request, session, redirect, url_for, flash, make_response, send_from_directory
 import qrcode
 import os
 import uuid
 import json
-import send_from_directory
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
